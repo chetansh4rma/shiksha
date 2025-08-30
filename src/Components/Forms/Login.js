@@ -20,7 +20,7 @@ const Login = () => {
   const slowLoadingIndicator = () => {
     setTimeout(() => {
       setMessage(
-        "NOTE:Web Services on the free instance type are automatically spun down after 15 minutes of inactivity. When a new request for a free service comes in, Render spins it up again so it can process the request. This will cause a delay in the response of the first request after a period of inactivity while the instance spins up."
+        "NOTE: Web services on the free instance type may spin down after 15 minutes of inactivity. The first request after inactivity might be delayed as the service spins back up."
       );
     }, 4000);
   };
@@ -64,30 +64,26 @@ const Login = () => {
   return (
     <>
       {!user?._id ? (
-        <main className="relative z-0 flex h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-400 to-slate-300 text-slate-950 dark:from-slate-800 dark:to-slate-950 dark:text-slate-300">
+        <main className="relative z-0 flex h-screen flex-col items-center justify-center bg-gradient-to-b from-blue-100 to-blue-50 text-gray-800">
           {message && !error && (
-            <header className="absolute top-0 w-full bg-violet-500/50 p-2 text-xs dark:bg-slate-700/50 lg:text-base">
+            <header className="absolute top-0 w-full bg-blue-200 p-2 text-xs text-blue-800 lg:text-sm">
               {message}
             </header>
           )}
           <CircleDesign />
-          <section className="z-0 mb-4 flex items-center duration-200 gap-2 whitespace-nowrap text-6xl md:text-8xl lg:gap-4">
-            <FaUniversity />
-            <h1 className="font-spectral font-semibold  text-slate-900  dark:text-slate-300 ">
-              K
-              <span className="inline-block h-10 w-10 rounded-full bg-violet-900 dark:bg-violet-600 md:h-14 md:w-14 xl:h-14 xl:w-14"></span>
-              llege
-            </h1>
+          <section className="z-0 mb-4 flex items-center gap-2 text-6xl font-bold text-blue-800 md:text-7xl lg:gap-4">
+            <h1 className="font-spectral">Shiksha Setu</h1>
           </section>
-          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100 duration-200 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)] ">
+
+          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-white border border-gray-300 shadow-md p-2 sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
             <form
-              className="tracking-wide placeholder:text-slate-200 dark:placeholder:text-violet-200 "
+              className="tracking-wide placeholder:text-gray-400"
               onSubmit={(e) => handleLogin(e)}
             >
-              <section className="flex flex-col items-center justify-start ">
-                <div className="flex w-full text-lg ">
+              <section className="flex flex-col items-center justify-start">
+                <div className="flex w-full text-lg font-semibold">
                   <label
-                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tl-lg p-4 dark:border-l-[1.5px] dark:border-t-[1.5px]  dark:border-solid dark:border-violet-900"
+                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tl-lg p-4 border border-r-0 border-blue-300"
                     htmlFor="staff"
                   >
                     Staff
@@ -101,7 +97,7 @@ const Login = () => {
                     />
                   </label>
                   <label
-                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tr-lg p-4 dark:border-r-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-violet-900"
+                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tr-lg p-4 border border-l-0 border-blue-300"
                     htmlFor="student"
                   >
                     Student
@@ -115,63 +111,68 @@ const Login = () => {
                     />
                   </label>
                 </div>
-                <div className="flex duration-200 w-full justify-center p-1 pt-0 text-8xl dark:border-x-[1.5px] dark:border-solid dark:border-violet-900 md:p-3 md:pt-0">
+
+                <div className="w-full flex justify-center p-2 text-7xl">
                   {userType === "student" ? (
-                    <PiStudentThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
-                    ) : userType === "staff" ? (
-                      <PiUserThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
-                      ) : (
-                        <FaUniversity className="animate-fadeIn rounded-lg border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
-                        )}
+                    <PiStudentThin className="rounded-full border-2 border-blue-700 p-1" />
+                  ) : userType === "staff" ? (
+                    <PiUserThin className="rounded-full border-2 border-blue-700 p-1" />
+                  ) : (
+                    <FaUniversity className="rounded-lg border-2 border-blue-700 p-1" />
+                  )}
                 </div>
               </section>
-              <section className="rounded-b-lg px-4 pb-4 dark:border-x-[1.5px] dark:border-b-[1.5px] dark:border-solid dark:border-violet-900">
-              {userType?
-              <>
-                <input
-                  className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
-                  placeholder="username"
-                  id="username"
-                  type="text"
-                  required
-                  autoComplete="off"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  />
-                <input
-                  className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-violet-900 dark:border-slate-200 dark:caret-inherit dark:focus:border-violet-400 dark:active:border-violet-400"
-                  placeholder="password"
-                  id="password"
-                  type="password"
-                  required
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  />
-                <button
-                  className="mb-1 flex h-10 w-full items-center justify-center gap-1 rounded-md border-[1.5px] border-solid border-violet-900 bg-slate-800 p-1 font-bold tracking-wide text-slate-200 hover:bg-violet-900 focus:bg-violet-900 disabled:cursor-wait dark:border-violet-300 dark:bg-violet-600 dark:text-slate-50 dark:hover:bg-slate-900 dark:focus:bg-slate-900 lg:mb-2 "
-                  type="submit"
-                  value="Login"
-                  disabled={buttonText !== "Login"}
-                  onClick={(e) => handleLogin(e)}
-                  >
-                  {!(buttonText === "Login") && (
-                    <PiSpinnerGapBold className="animate-spin" />
-                    )}
-                  {buttonText}
-                </button>
-                </>
-                : <p className="w-full bg-violet-300 dark:bg-violet-950/90 duration-200 rounded p-4 my-12 text-center">Select User Type</p>  }
+
+              <section className="rounded-b-lg px-4 pb-4">
+                {userType ? (
+                  <>
+                    <input
+                      className="mb-4 block h-10 w-full rounded-md border border-gray-300 p-2 outline-none focus:border-blue-600"
+                      placeholder="username"
+                      id="username"
+                      type="text"
+                      required
+                      autoComplete="off"
+                      name="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <input
+                      className="mb-4 block h-10 w-full rounded-md border border-gray-300 p-2 outline-none focus:border-blue-600"
+                      placeholder="password"
+                      id="password"
+                      type="password"
+                      required
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button
+                      className="mb-2 flex h-10 w-full items-center justify-center gap-1 rounded-md border border-blue-700 bg-blue-600 text-white font-bold hover:bg-blue-700 disabled:cursor-wait"
+                      type="submit"
+                      value="Login"
+                      disabled={buttonText !== "Login"}
+                    >
+                      {!(buttonText === "Login") && (
+                        <PiSpinnerGapBold className="animate-spin" />
+                      )}
+                      {buttonText}
+                    </button>
+                  </>
+                ) : (
+                  <p className="w-full bg-blue-100 border border-blue-300 text-blue-800 rounded p-4 my-8 text-center">
+                    Select User Type
+                  </p>
+                )}
+
                 {error ? <ErrorStrip error={error} /> : ""}
-                <p className="inline text-slate-600 dark:text-violet-200">
-                  Click to{" "}
-                </p>
+
+                <p className="inline text-gray-600">Click to </p>
                 <button
                   type="button"
-                  className="font-semibold text-violet-600 decoration-2 hover:underline focus:underline   dark:text-violet-400"
+                  className="font-semibold text-blue-600 underline hover:text-blue-800"
                   onClick={() => navigate("./register/reg_student")}
-                  >
+                >
                   Register
                 </button>
               </section>

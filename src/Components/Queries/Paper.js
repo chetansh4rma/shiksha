@@ -5,7 +5,7 @@ import { AiFillBook } from "react-icons/ai";
 
 const Paper = () => {
   const { setPaper, paperList } = useContext(UserContext);
-
+// console.log(paperList);
   return (
     <main className="paper">
       <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">

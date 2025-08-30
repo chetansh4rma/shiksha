@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 
 // context
 import { UserProvider } from "./Hooks/UserContext";
-
+import FloatingChatbot from "./Components/Queries/bookrecomend";
 // components
 import Loading from "./Components/Layouts/Loading";
 // layouts
@@ -33,6 +33,7 @@ import StudentForm from "./Components/Forms/StudentForm";
 import NotesForm from "./Components/Forms/NotesForm";
 import TimeScheduleForm from "./Components/Forms/TimeScheduleForm";
 import Login from "./Components/Forms/Login";
+import QRAttendanceForm from "./Components/Forms/QRAttendanceForm";
 
 // lazy loading user specific components
 const StaffApproval = lazy(() =>
@@ -46,6 +47,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<AppLayout />} errorElement={<ErrorElement />}>
         <Route index element={<Login />} />
+        <Route path="qr-attendance/:sessionId" element={<QRAttendanceForm />} />
         <Route path="/register" element={<RegisterLayout />}>
           <Route path="reg_staff" element={<StaffForm />} />
           <Route path="reg_student" element={<StudentForm />} />
@@ -96,6 +98,7 @@ function App() {
 
   return (
     <UserProvider>
+      <FloatingChatbot/>
       <RouterProvider router={router} />
       <ToastContainer
         className="toast"

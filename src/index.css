@@ -1,12 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Spectral+SC&display=swap");
 
 @layer html {
   :root {
-    --toastify-color-light: #7c3aed;
-    --toastify-text-color-light: #ddd6fe;
+    --toastify-color-light: #3b82f6; /* blue-500 */
+    --toastify-text-color-light: #1e293b; /* slate-800 */
   }
 
   input,
@@ -14,98 +15,96 @@
   textarea {
     background-color: transparent;
     display: block;
+    color: #1e293b; /* slate-800 */
   }
 
-  .text-balance {
-    text-wrap: balance;
-
+  form {
+    accent-color: #2563eb; /* blue-600 */
   }
-
-form{
-  accent-color: rgb(221 214 254);
-}
 
   .select-img {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(124, 58, 237)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-position: center right 1px;
     background-size: 1rem auto;
     background-repeat: no-repeat;
   }
 
   .radio:has(input:checked) {
-    color: #a78bfa;
+    color: #2563eb; /* blue-600 */
     font-weight: bold;
   }
 
   select:disabled {
     background-image: none;
+    color: #9ca3af; /* gray-400 */
   }
 
   .outlet-border {
-    border-color: #020617;
+    border-color: #1e3a8a; /* blue-900 */
     border-width: 4px;
     border-radius: 0.75rem;
   }
 
-  .secondLast:nth-last-child(2){
+  .secondLast:nth-last-child(2) {
     text-align: center;
   }
 
   #nav a.active {
-    background-color: #4c1d95;
+    background-color: #2563eb; /* blue-600 */
     border-radius: 0.375rem;
+    color: white;
   }
 
   #register a.active {
-    color: #8b5cf6 !important;
+    color: #3b82f6 !important; /* blue-500 */
   }
 
-  #resister #root .toast {
-    color: #2e1065 !important;
-  }
+  #root .toast,
   #root .toast-body {
-    color: #2e1065 !important;
+    color: #1e3a8a !important; /* blue-900 */
   }
+
   #root .toast-rounded {
     border-radius: 6px !important;
-    background-color: #ddd6fe !important;
+    background-color: #dbeafe !important; /* blue-100 */
   }
 
-  .scrollWidth:-webkit-scrollbar {
+  .scrollWidth::-webkit-scrollbar {
     display: none;
   }
 
-  /* Hide scrollbar for IE, Edge and Firefox */
   .scrollWidth {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
-  /* #root .toast-progress {
-    background: #6d28d9 !important;
-  } */
 
   @media (prefers-color-scheme: dark) {
     #nav a.active {
-      background-color: #6d28d9;
-      border-radius: 0.375rem;
+      background-color: #3b82f6; /* blue-500 */
     }
+
     #register a.active {
-      color: #4c1d95;
+      color: #60a5fa; /* blue-400 */
     }
+
     option {
-      background-color: #cbd5e1;
-      color: #0f172a;
+      background-color: #93c5fd; /* blue-300 */
+      color: #0f172a; /* slate-900 */
     }
-    #root .toast {
-      color: #e4e0fa !important;
+
+    input,
+    select,
+    textarea {
+      color: #e2e8f0; /* slate-200 */
     }
+
+    #root .toast,
     #root .toast-body {
-      color: #e4e0fa !important;
+      color: #dbeafe !important; /* blue-100 */
     }
+
     #root .toast-rounded {
       border-radius: 6px !important;
-      background-color: #2e1065 !important;
+      background-color: #1e3a8a !important; /* blue-900 */
     }
   }
 }

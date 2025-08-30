@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { FaUniversity } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import UserContext from "../../Hooks/UserContext";
@@ -7,32 +6,33 @@ import { toast } from "react-toastify";
 
 const Header = () => {
   const { setUser, setPaperList } = useContext(UserContext);
+
   const logout = () => {
     setUser("");
     setPaperList([]);
     localStorage.clear();
+    localStorage.removeItem("paperNames");
     toast.info("Logged Out");
   };
+
   return (
-    <header className="absolute top-0 flex w-full justify-between bg-slate-950 text-slate-50 dark:bg-slate-950 ">
+    <header className="absolute top-0 z-10 flex w-full items-center justify-between bg-white/60 backdrop-blur-md border-b border-blue-300 px-6 py-3 shadow-md">
       <Link
         to="/dash"
-        className="ml-4 flex items-center gap-2 px-3 py-1 text-2xl font-semibold sm:text-3xl"
+        className="flex items-center text-2xl sm:text-3xl font-spectral font-bold text-[#081d58] tracking-wide"
       >
-        <FaUniversity className="m-1" />
-        <h1 className="m-0 pr-1 font-spectral text-slate-50 decoration-violet-500 decoration-[3px] underline-offset-[3px] hover:underline">
-          K
-          <span className="inline-block h-4 w-4 rounded-full bg-violet-500 dark:bg-violet-500 sm:h-[1.15rem] sm:w-[1.15rem]"></span>
-          llege
+        <h1 className="hover:underline underline-offset-[4px] decoration-[2.5px] decoration-[#7c3aed]">
+          Shiksha Setu
         </h1>
       </Link>
+
       <Link
-        to="./"
-        className="text-md m-2 mr-4 flex items-center rounded-md p-[7px] font-semibold duration-200 hover:bg-red-700 hover:text-slate-100"
-        onClick={() => logout()}
+        to="/"
+        onClick={logout}
+        className="flex items-center gap-2 rounded-md bg-[#081d58] px-4 py-[6px] text-white text-sm font-medium shadow-sm hover:bg-[#112b7a] duration-200"
       >
-        <p>&nbsp;Logout&nbsp;&nbsp;</p>
-        <FiLogOut className="text-xl" />
+        <span>Logout</span>
+        <FiLogOut className="text-base" />
       </Link>
     </header>
   );

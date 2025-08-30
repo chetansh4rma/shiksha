@@ -1,10 +1,11 @@
 import { useState, useContext } from "react";
 import axios from "../../config/api/axios";
 import UserContext from "../../Hooks/UserContext";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { FaPlus, FaEdit, FaTrash, FaQrcode, FaList } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { TableHeader, RowWithCheckbox } from "../Table";
 import ErrorStrip from "../ErrorStrip";
+import QRAttendanceGenerator from "./QRAttendanceGenerator";
 
 const Attendance = () => {
   const { paperList } = useContext(UserContext);
@@ -15,6 +16,7 @@ const Attendance = () => {
   const [error, setError] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [id, setId] = useState("");
+  const [activeTab, setActiveTab] = useState("traditional");
 
   // fetching Attendance
   const fetchAttendance = async (e) => {
@@ -116,6 +118,36 @@ const Attendance = () => {
       <h2 className="mb-2 mt-3 whitespace-break-spaces text-4xl font-bold text-violet-950 underline decoration-inherit decoration-2 underline-offset-4 dark:mt-0 dark:text-slate-400 md:text-6xl">
         Attendance
       </h2>
+      
+      {/* Tab Navigation */}
+      <div className="mb-6 flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
+        <button
+          onClick={() => setActiveTab("traditional")}
+          className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+            activeTab === "traditional"
+              ? "bg-white text-violet-900 shadow-sm dark:bg-gray-700 dark:text-violet-300"
+              : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+          }`}
+        >
+          <FaList />
+          Traditional Attendance
+        </button>
+        <button
+          onClick={() => setActiveTab("qr")}
+          className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+            activeTab === "qr"
+              ? "bg-white text-violet-900 shadow-sm dark:bg-gray-700 dark:text-violet-300"
+              : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+          }`}
+        >
+          <FaQrcode />
+          QR Attendance
+        </button>
+      </div>
+      
+      {/* Tab Content */}
+      {activeTab === "traditional" && (
+        <>
       <section className="attendance__head">
         <form className="w-full gap-4 accent-violet-900 md:flex ">
           <div className="flex w-full flex-col">
@@ -243,6 +275,10 @@ const Attendance = () => {
           )}
         </form>
       </section>
+        </>
+      )}
+      
+      {activeTab === "qr" && <QRAttendanceGenerator />}
     </main>
   );
 };
